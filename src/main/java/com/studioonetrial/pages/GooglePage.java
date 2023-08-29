@@ -9,7 +9,7 @@ import java.util.List;
 import static com.studioonetrial.helper.WaitHelper.getWait;
 
 public class GooglePage extends PageBase{
-     String url = "https://www.google.com/";
+    private String url = "https://www.google.com/";
 
      @FindBy(css = ".RNNXgb textarea[type$='search']")
      private WebElement searchField;
