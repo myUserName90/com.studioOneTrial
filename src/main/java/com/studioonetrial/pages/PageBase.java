@@ -1,8 +1,10 @@
 package com.studioonetrial.pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.studioonetrial.config.DriverFactory.getDriver;
@@ -47,6 +49,7 @@ public class PageBase {
     }
 
     protected void click(WebElement element) {
+        getWait().waitUntilElementToBeVisible(element);
         getWait().waitUntilElementToBeClickable(element);
         element.click();
     }
@@ -58,6 +61,20 @@ public class PageBase {
 
     protected void pressEnterKey(WebElement element) {
         element.sendKeys(Keys.ENTER);
+    }
+
+    protected void switchToIframeElement(WebElement element){
+        getDriver().switchTo().frame(element);
+    }
+
+    protected void performClickByActions(WebElement element){
+        Actions actions = new Actions(getDriver());
+        actions.click(element).build().perform();
+    }
+
+    protected void switchToTab(int tabId){
+        ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs.get(tabId));
     }
 
 
